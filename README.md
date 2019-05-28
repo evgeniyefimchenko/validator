@@ -6,7 +6,7 @@
 ```html
 <script>
 	if(jQuery().validator) {
-		$('[data-validator]').validator();
+		jQuery('[data-validator]').validator();
 	}
 </script>
 ```
