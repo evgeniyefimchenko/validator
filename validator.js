@@ -1,9 +1,9 @@
-/* validator v1.5 23.05.2018 efimchenko.ru*/
+/* validator 1.5 23.05.2018 efimchenko.ru*/
 
 /* Зависимости Font Awesome 4.7.0, bootstrap4, jQuery 3;
  * Плагин проверки полей ввода на валидность.
- * Так же предлагает сгенерировать пароль при его ненадёжности.
- * Выводит оценку надёжности в виде звёзд(требуется подключение ).
+ * Так же предлагает сгенерировать пароль в случае его ненадёжности.
+ * Выводит оценку надёжности в виде звёзд.
  */
 (function ($) {
     $.fn.validator = function () {
@@ -13,10 +13,10 @@
          * Паттерны для проверки полей формы
          * @type RegExp
          */        
-        var pattern_email = /^([a-zа-яё0-9_\.-])+@[a-zа-яё0-9-]+\.([a-zа-яё]{2,4}\.)?[a-zа-яё]{2,4}$/i; // email адреса с учётом русской локали
-        var pattern_string = /^[a-zа-яё\.\! ]+$/i; // Строка
+        var pattern_email = /^([a-zа-яё0-9_\.-])+@[a-zа-яё0-9-]+\.([a-zа-яё]{2,4}\.)?[a-zа-яё]{2,4}$/i; // электронная почта, латинские и кириллические символы
+        var pattern_string = /^[a-zа-яё\.\!\? ]+$/i; // Строка, латинские и кириллические символы, точка, знак вопроса и восклицания
         var pattern_digital = /^\d+$/; // Цифры
-        var pattern_phone_ru = /^[\d+][\d\(\)\ -]{4,14}\d$/; // Номер телефона
+        var pattern_phone_ru = /^[\d+][\d\(\)\ -]{4,14}\d$/; // Номер телефона, международный формат
         var pattern_password = /[a-z\d+\!\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\/\.\,\:\;\[\]\{\}]+/i; // Пароль            
         var pattern_year = /^\d{4}$/; // Год
         var pattern_vendor_code = /^[a-яёa-z\d-\/\(\)\№\" \,\.]+$/i; // Код производителя
@@ -28,17 +28,17 @@
         var pattern_okpo = /^\d{8,10}$/; // ОКПО
         var pattern_ogrn = /^\d{13}$/; // ОГРН
         var pattern_bik = /^\d{9}$/; // БИК
-        var ip_or_url = /^[a-z0-9\.\-\_]+$/i; // IP или uri адреса 
+        var ip_or_url = /^[a-z0-9\.\-\_]+$/i; // IPv4, IPv6 или доменное имя
         var unix_path = /^\/$|(^(?=\/)|^\.|^\.\.)(\/(?=[^/\0])[^/\0]+)*\/?$/;
         var url_path_file = /^((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/;
         var win_path = /[a-zA-Z]:[\\\/](?:[a-zA-Z0-9]+[\\\/])*([a-zA-Z0-9]+)/;
         /**
-	* Новые паттерны пока не обрабатываются
-	*/
-	var creditCard = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$';
-	var username = '/^[a-z0-9_-]{3,16}$/';		
-	var dateDDMMYYY = '^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)dd$';  // Дата в формате DD/MM/YYYY
-	/**
+		* Новые паттерны пока не обрабатываются
+		*/
+		var creditCard = '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$';
+		var username = '/^[a-z0-9_-]{3,16}$/';		
+		var dateDDMMYYY = '^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)dd$';  // Дата в формате DD/MM/YYYY
+		/**
          * Генерирует случайный пароль
          * @param {int} length количество символов в пароле
          * @returns {String} сгенерированный пароль
@@ -102,11 +102,15 @@
         }
         ;
         /*Добавляем бэйджи для вывода ошибок*/
-        this.after('<span class="badge badge-danger validatorbadgedanger" style="display:none;"></span>');
-        /*Добавляем звёзды если есть поля с проверкой сложности пароля*/
-        $('[data-validator  = "password_strength"]').after('<span class="star-rating" title="Сложность пароля" data-toggle="tooltip"><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span><br/>');
-        /*Если есть параметр password_strength создаёт кнопку генерации пароля */
-        $('[data-validator  = "password_strength"]').after('<button type="button" id="validatorgenpass" class="btn btn-info btn-sm" style="display:none;">Сгенерировать?</button>');
+		this.after('<span class="badge badge-danger validatorbadgedanger" style="display:none;"></span>');
+        /*Добавляем звёзды если есть поля с проверкой сложности пароля и они ещё не созданы*/
+        if (!$("span").is(".star-rating")) {
+			$('[data-validator  = "password_strength"]').after('<span class="star-rating" title="Сложность пароля" data-toggle="tooltip"><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span><br/>');
+		}
+        /*Если есть параметр password_strength создаёт кнопку генерации пароля, если ещё не создана*/
+		if (!$("button").is("#validatorgenpass")) {
+			$('[data-validator  = "password_strength"]').after('<button type="button" id="validatorgenpass" class="btn btn-info btn-sm" style="display:none;">Сгенерировать?</button>');
+		}
         /*При нажатии генерировать пароль вставлям его в поле ввода, проверяем надёжность и делаем поле текстовым для видимости пароля
          * после выхода с поля в обработке blur обратно меняется тип на password*/
         $('#validatorgenpass').click(function () {
