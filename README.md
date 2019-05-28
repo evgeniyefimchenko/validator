@@ -2,7 +2,7 @@
 Простой jQuery плагин проверки полей ввода на валидность.
 Зависимости Font Awesome 4.7.0, bootstrap4, jQuery 3;
 ***
-**Инициализация плагина:**
+**Инициализация плагина**
 ```html
 <script>
 	if(jQuery().validator) {
@@ -11,7 +11,7 @@
 </script>
 ```
 
-**Использование в HTML:**
+**Использование в HTML**
 ```html
 <div class="form">
     <form id="reg_form" method="post" data-remote="true" accept-charset="UTF-8">
@@ -27,5 +27,11 @@
     </form>
 </div>
 ```
+**Описание**
+В атрибут data-validator указываем необходимое правило для проверки.
+***Список правил:***
+email - электронная почта, латинские и кириллические символы
+string - строка, латинские и кириллические символы, точка, знак вопроса и восклицания>
+digital - цифры
 
 Copyright <http://efimchenko.ru> 2018 under the MIT license.
