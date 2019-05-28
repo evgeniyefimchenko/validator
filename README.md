@@ -10,6 +10,7 @@
 	}
 </script>
 ```
+![Первый скрин](http://efimchenko.ru/images/temp/screen1.png) ![Второй скрин](http://efimchenko.ru/images/temp/screen2.png)
 
 **Использование в HTML**
 ```html
