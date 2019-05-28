@@ -8,7 +8,8 @@
 	if(jQuery().validator) {
 		$('[data-validator]').validator();
 	}
-</script>```
+</script>
+```
 
 **Использование в HTML:**
 ```html
