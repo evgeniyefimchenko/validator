@@ -1,18 +1,14 @@
 # validator
 Простой jQuery плагин проверки полей ввода на валидность.
-
 Зависимости Font Awesome 4.7.0, bootstrap4, jQuery 3;
-
-<hr/>
-Использование.<br/>
-Инициализация плагина:<br/>
+***
+Инициализация плагина:
 <script>
 	if(jQuery().validator) {
 		$('[data-validator]').validator();
 	}
 </script>
   Использование в HTML:
-<code>
 <div class="form">
     <form id="reg_form" method="post" data-remote="true" accept-charset="UTF-8">
         <div class="form-group">
@@ -28,5 +24,4 @@
 </div>
 </code>
 
-## Copyright and license
-Copyright 2018 under the MIT license.
+Copyright Evgeniy Efimchenko 2018 under the MIT license.
