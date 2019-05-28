@@ -27,3 +27,5 @@
     </form>
 </div>
 </html>
+## Copyright and license
+Copyright 2018 under the MIT license.
