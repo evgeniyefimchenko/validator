@@ -43,7 +43,7 @@
 <script>
 var error = 0;
 	$('.validatorbadgedanger').each(function(){
-		if ($(this).attr('display') !== 'none') {
+		if ($(this).css('display') !== 'none') {
 			error = 1;
 		}
 	});
