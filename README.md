@@ -33,14 +33,21 @@
 В атрибут data-validator указываем необходимое правило для проверки, список правил приведён ниже.
 После каждого поля с data-validator будет добавлен тэг:
 ```html
-<span class="badge badge-danger validatorbadgedanger" style="display:none;"></span>
+<span class="badge badge-danger validatorbadgedanger" style="display: none;"></span>
 ```
 Принимающий описание ошибки ввода.
 Если использовать AJAX отправку формы, то удобно делать проверку валидности ввода по видимым элементам с классом validatorbadgedanger
 
 Пример javascript:
 ```html
-
+<script>
+var error = 0;
+	$('.validatorbadgedanger').each(function(){
+		if ($(this).attr('display') !== 'none') {
+			error = 1;
+		}
+	});
+</script>
 ```
 
 ***Список правил:***
