@@ -30,7 +30,7 @@
 ```
 **Описание**
 
-В атрибут data-validator указываем необходимое правило для проверки, список правил приведён ниже.
+В атрибут data-validator указываем одно необходимое правило для проверки, список правил приведён ниже.
 После каждого поля с data-validator будет добавлен тэг:
 ```html
 <span class="badge badge-danger validatorbadgedanger" style="display: none;"></span>
