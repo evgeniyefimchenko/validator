@@ -105,7 +105,7 @@
 		this.after('<span class="badge badge-danger validatorbadgedanger" style="display:none;"></span>');
         /*Добавляем звёзды если есть поля с проверкой сложности пароля и они ещё не созданы*/
         if (!$("span").is(".star-rating")) {
-			$('[data-validator  = "password_strength"]').after('<span class="star-rating" title="Сложность пароля" data-toggle="tooltip"><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span><br/>');
+			$('[data-validator  = "password_strength"]').after('<span style="display: none;" class="star-rating" title="Сложность пароля" data-toggle="tooltip"><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span>');
 		}
         /*Если есть параметр password_strength создаёт кнопку генерации пароля, если ещё не создана*/
 		if (!$("button").is("#validatorgenpass")) {
@@ -268,7 +268,7 @@
                             var i = stars.length;
                             var l = 1;
                             $('.star-rating').children().each(function(){
-                                if(i>=l){$(this).removeClass('fa-star-o').addClass('fa-star');}
+                                if(i>=l){$('.star-rating').show(); $(this).removeClass('fa-star-o').addClass('fa-star');}
                                 else {$(this).removeClass('fa-star').addClass('fa-star-o');}
                                 l++;
                             });                            
