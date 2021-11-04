@@ -1,6 +1,7 @@
 # validator
 Простой jQuery плагин проверки полей ввода на валидность.
 Зависимости Font Awesome 4.7.0, bootstrap4, jQuery 3;
+https://github.com/evgeniyefimchenko/validator
 ***
 **Подключение зависимостей**
 ```html
@@ -84,4 +85,4 @@ var error = 0;
 * win_path - WINDOWS путь к файлу
 
 
-Copyright <http://efimchenko.ru> 2018 under the MIT license.
+Copyright <https://efimchenko.ru> 2018 under the MIT license.
